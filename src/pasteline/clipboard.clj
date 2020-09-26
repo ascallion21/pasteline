@@ -12,5 +12,5 @@
     (catch UnsupportedFlavorException e nil)))
 
 (defn clipset [text]
-  (let [selection (StringSelection. text)]
+  (let [selection (StringSelection. (str text))]
     (.setContents (clipboard) selection selection)))

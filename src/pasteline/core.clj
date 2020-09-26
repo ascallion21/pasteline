@@ -5,11 +5,10 @@
 (require 'pasteline.robot)
 (require 'keymaster.core)
 
-(defn paste [] (
-  (let [text (clojure.string/replace (pasteline.clipboard/clipget) #"[\r\n]+", "")]
-  (println text)
-  (pasteline.clipboard/clipset text)
-  (pasteline.robot/pastetext))))
+(defn paste []
+  ((let [text (clojure.string/replace (pasteline.clipboard/clipget) #"[\r\n]+", "")]
+     (pasteline.clipboard/clipset text)
+     (pasteline.robot/pastetext))))
 
 (defn -main
   "Strips newlines from a text block when pasting via ctrl-alt-v"
