@@ -14,4 +14,4 @@
   "Strips newlines from a text block when pasting via ctrl-alt-v"
   [& args]
   (let [provider (keymaster.core/make-provider)]
-    (keymaster.core/register provider "control alt V" #((pasteline.core/paste)))))
+    (keymaster.core/register provider "control alt V" #(pasteline.core/onPaste))))
