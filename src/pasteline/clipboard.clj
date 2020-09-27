@@ -1,16 +1,22 @@
-(ns pasteline.clipboard)
+(ns pasteline.clipboard
+  (:import [java.awt.datatransfer DataFlavor StringSelection UnsupportedFlavorException]))
 
-(import '[java.awt.datatransfer DataFlavor StringSelection UnsupportedFlavorException])
-
-(defn clipboard []
+(defn clipboard
+  "Provides an instance of the system clipboard"
+  []
   (.getSystemClipboard (java.awt.Toolkit/getDefaultToolkit)))
 
-(defn clipget []
+(defn clipget
+  "Retrieves the current text in the clipboard
+   Returns null if nothing has been copied previously"
+  []
   (try
     (.getTransferData (.getContents (clipboard) nil) (DataFlavor/stringFlavor))
-    (catch java.lang.NullPointerException e nil)
-    (catch UnsupportedFlavorException e nil)))
+    (catch java.lang.NullPointerException _ nil)
+    (catch UnsupportedFlavorException _ nil)))
 
-(defn clipset [text]
+(defn clipset
+  "Sets the current clipboard text"
+  [text]
   (let [selection (StringSelection. (str text))]
     (.setContents (clipboard) selection selection)))

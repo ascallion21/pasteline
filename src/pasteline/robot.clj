@@ -1,16 +1,17 @@
-(ns pasteline.robot)
+(ns pasteline.robot
+  (:import (java.awt Robot Robot)
+           java.awt.event.KeyEvent))
 
-(import '[java.awt Robot Robot])
-(import '[java.awt.event KeyEvent])
-
-(defn robot []
+(defn robot
+  "Creates a new instance of Robot"
+  []
   (Robot.))
 
-(defn pastetext []
+(defn pastetext
+  "Invokes ctrl-V"
+  []
   (let [r (robot)]
-    (try
-      (.keyPress r KeyEvent/VK_CONTROL)
-      (.keyPress r KeyEvent/VK_V)
-      (.keyRelease r KeyEvent/VK_V)
-      (.keyRelease r KeyEvent/VK_CONTROL)
-      (catch java.lang.NullPointerException e nil))))
+    (.keyPress r KeyEvent/VK_CONTROL)
+    (.keyPress r KeyEvent/VK_V)
+    (.keyRelease r KeyEvent/VK_V)
+    (.keyRelease r KeyEvent/VK_CONTROL)))
